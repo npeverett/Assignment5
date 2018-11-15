@@ -1,4 +1,6 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "Faculty.h"
 #include "DoubleLL.h"
 
@@ -11,7 +13,7 @@ Faculty::Faculty()
 }
 
 //Overloaded Faculty Constructor
-Faculty::Faculty(Person p, string department, DoubleLL<int> adviseeIDs)
+Faculty::Faculty(Person* p, string department, DoubleLL<int> adviseeIDs)
 {
   person = p;
   Department = department;
@@ -22,4 +24,53 @@ Faculty::Faculty(Person p, string department, DoubleLL<int> adviseeIDs)
 Faculty::~Faculty()
 {
 
+}
+
+bool Faculty::operator!= (const Faculty& fc) const
+{
+  return ID != fc.ID;
+}
+
+bool Faculty::operator== (const Faculty& fc) const
+{
+  return ID == fc.ID;
+}
+
+bool Faculty::operator< (const Faculty& fc) const
+{
+  return ID < fc.ID;
+}
+
+bool Faculty::operator> (const Faculty& fc) const
+{
+  return ID > fc.ID;
+}
+
+
+void Faculty::printFacultyInfo(Faculty* fc)
+{
+  cout << "ID: " << fc -> person -> getID() << endl;
+  cout << "Name: " << fc -> person -> getName() << endl;
+  cout << "Level: " << fc -> person -> getLevel() << endl;
+  cout << "Department: " << fc -> Department << endl;
+  cout << "Students: " << endl;
+  fc -> AdviseeIDs.printList();
+}
+
+//Compiler does not recognize Type during compile time, so BST must have
+//printStudentInfo method in Faculty class, and vice versa in Student class (NEVER CALLED)
+void Faculty::printStudentInfo(const Faculty* fc)
+{
+
+}
+
+int Faculty::createRandomID()
+{
+  //Generate random seed
+  srand(time(NULL));
+
+  //Generate random ID number
+  int id = rand() % 10000 + 1;
+
+  return id;
 }

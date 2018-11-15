@@ -88,7 +88,7 @@ DoubleLL<T>::~DoubleLL()
     removeFront();
   }
 
-  cout << "Doubly-Linked List Destroyed" << endl;
+  //cout << "Doubly-Linked List Destroyed" << endl;
 }
 
 //Method to insert new node at front of list

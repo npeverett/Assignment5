@@ -1,7 +1,12 @@
 #pragma once
 #ifndef BST_H
 #define BST_H
+#define MARKER -1
 #include <iostream>
+#include <typeinfo>
+#include <stdio.h>
+#include "Student.h"
+#include "Faculty.h"
 
 using namespace std;
 
@@ -60,11 +65,16 @@ public:
   bool deleteNode(T value);
   bool contains(T value);
   bool isEmpty();
+
+  T find(int v);
   TreeNode<T>* getSuccessor(TreeNode<T>* d);
+  TreeNode<T>* getRoot();
 
   void printTree();
   void recPrint(TreeNode<T>* node);
 
+  void serialize(TreeNode<T>* node);
+  void deserialize();
 private:
   TreeNode<T>* root;
 };
@@ -318,6 +328,11 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>* d)
   return successor;
 }
 
+template <class T>
+TreeNode<T>* BST<T>::getRoot()
+{
+  return root;
+}
 
 //Method to see if a value is in the Tree
 template <class T>
@@ -360,6 +375,38 @@ bool BST<T>::contains(T v)
   return true;
 }
 
+template <class T>
+T BST<T>::find(int v)
+{
+  if (isEmpty())
+  {
+    cout << "Tree is empty" << endl;
+  }
+  else
+  {
+    TreeNode<T>* curr = root;
+    while (curr -> value != v)
+    {
+      if (v < curr -> value)
+      {
+        curr = curr -> left;
+      }
+
+      else
+      {
+        curr = curr -> right;
+      }
+
+      if (curr == NULL)
+      {
+        cout << "Could not find value" << endl;
+        break;
+      }
+    }
+    return curr -> value;
+  }
+}
+
 //Method to print nodes in tree (inOrder)
 template <class T>
 void BST<T>::recPrint(TreeNode<T>* node)
@@ -375,9 +422,31 @@ void BST<T>::recPrint(TreeNode<T>* node)
     return;
   }
 
-  recPrint(node -> left);
-  cout << node -> value << endl;
-  recPrint(node -> right);
+  //If node value is a student, print respective student info
+  if (typeid(node -> value).name() == typeid(Student*).name())
+  {
+    recPrint(node -> left);
+    node -> value -> printStudentInfo(node -> value);
+    cout << endl;
+    recPrint(node -> right);
+  }
+
+  //If node value is a faculty member, print respective faculty info
+  else if (typeid(node -> value).name() == typeid(Faculty*).name())
+  {
+    recPrint(node -> left);
+    node -> value -> printFacultyInfo(node -> value);
+    cout << endl;
+    recPrint(node -> right);
+  }
+
+  //For all other types, print normal value
+  else
+  {
+    recPrint(node -> left);
+    cout << node -> value << endl;
+    recPrint(node -> right);
+  }
 }
 
 
@@ -392,6 +461,57 @@ void BST<T>::printTree()
   }
 
   recPrint(root);
+}
+
+
+
+
+
+
+
+
+
+
+
+template <class T>
+void BST<T>::serialize(TreeNode<T>* node)
+{
+  if (node == NULL)
+  {
+    return;
+  }
+
+  //If node value is a student, print respective student info
+  if (typeid(node -> value).name() == typeid(Student*).name())
+  {
+    recPrint(node -> left);
+    node -> value -> printStudentInfo(node -> value);
+    cout << endl;
+    recPrint(node -> right);
+  }
+
+  //If node value is a faculty member, print respective faculty info
+  else if (typeid(node -> value).name() == typeid(Faculty*).name())
+  {
+    recPrint(node -> left);
+    node -> value -> printFacultyInfo(node -> value);
+    cout << endl;
+    recPrint(node -> right);
+  }
+
+  //For all other types, print normal value
+  else
+  {
+    recPrint(node -> left);
+    cout << node -> value << endl;
+    recPrint(node -> right);
+  }
+}
+
+template <class T>
+void BST<T>::deserialize()
+{
+
 }
 
 #endif

@@ -11,6 +11,10 @@ public:
   Person(int ID, string Name, string Level);
   ~Person();
 
+
+  int getID();
+  string getName();
+  string getLevel();
   void displayMenu();
 
 

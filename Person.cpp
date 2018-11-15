@@ -23,6 +23,21 @@ Person::~Person()
 
 }
 
+int Person::getID()
+{
+  return ID;
+}
+
+string Person::getName()
+{
+  return Name;
+}
+
+string Person::getLevel()
+{
+  return Level;
+}
+
 
 void Person::displayMenu()
 {
