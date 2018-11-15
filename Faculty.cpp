@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 #include <time.h>
 #include "Faculty.h"
 #include "DoubleLL.h"
@@ -59,9 +60,9 @@ void Faculty::printFacultyInfo(Faculty* fc)
 
 //Compiler does not recognize Type during compile time, so BST must have
 //printStudentInfo method in Faculty class, and vice versa in Student class (NEVER CALLED)
-void Faculty::printStudentInfo(const Faculty* fc)
+string Faculty::printStudentInfo(const Faculty* fc)
 {
-
+  return "";
 }
 
 int Faculty::createRandomID()
@@ -70,7 +71,7 @@ int Faculty::createRandomID()
   srand(time(NULL));
 
   //Generate random ID number
-  int id = rand() % 10000 + 1;
+  int id = 10000 + rand() % 9999 + 1;
 
   return id;
 }

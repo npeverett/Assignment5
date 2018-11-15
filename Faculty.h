@@ -18,7 +18,7 @@ public:
   bool operator<(const Faculty& fc) const;
 
   void printFacultyInfo(Faculty* fc);
-  void printStudentInfo(const Faculty* fc);
+  string printStudentInfo(const Faculty* fc);
 
   int createRandomID();
 

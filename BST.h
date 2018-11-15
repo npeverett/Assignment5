@@ -3,6 +3,7 @@
 #define BST_H
 #define MARKER -1
 #include <iostream>
+#include <fstream>
 #include <typeinfo>
 #include <stdio.h>
 #include "Student.h"
@@ -66,7 +67,7 @@ public:
   bool contains(T value);
   bool isEmpty();
 
-  T find(int v);
+  T find(T v);
   TreeNode<T>* getSuccessor(TreeNode<T>* d);
   TreeNode<T>* getRoot();
 
@@ -376,7 +377,7 @@ bool BST<T>::contains(T v)
 }
 
 template <class T>
-T BST<T>::find(int v)
+T BST<T>::find(T v)
 {
   if (isEmpty())
   {
@@ -476,42 +477,14 @@ void BST<T>::printTree()
 template <class T>
 void BST<T>::serialize(TreeNode<T>* node)
 {
-  if (node == NULL)
-  {
-    return;
-  }
 
-  //If node value is a student, print respective student info
-  if (typeid(node -> value).name() == typeid(Student*).name())
-  {
-    recPrint(node -> left);
-    node -> value -> printStudentInfo(node -> value);
-    cout << endl;
-    recPrint(node -> right);
-  }
-
-  //If node value is a faculty member, print respective faculty info
-  else if (typeid(node -> value).name() == typeid(Faculty*).name())
-  {
-    recPrint(node -> left);
-    node -> value -> printFacultyInfo(node -> value);
-    cout << endl;
-    recPrint(node -> right);
-  }
-
-  //For all other types, print normal value
-  else
-  {
-    recPrint(node -> left);
-    cout << node -> value << endl;
-    recPrint(node -> right);
-  }
 }
+
 
 template <class T>
 void BST<T>::deserialize()
 {
-
+  int position = 0;
 }
 
 #endif

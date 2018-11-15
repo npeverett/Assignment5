@@ -56,6 +56,9 @@ int main()
       cin >> id;
       cout << endl;
 
+      //Student* temp = studentTable.find(id);
+      //cout << temp -> printStudentInfo() << endl;
+
       continue;
     }
     if (option == 4)
@@ -65,6 +68,9 @@ int main()
       cout << "Please enter faculty ID number: ";
       cin >> id;
       cout << endl;
+
+      //Faculty* temp = facultyTable.find(id);
+      //temp -> printFacultyInfo();
 
       continue;
     }
@@ -77,6 +83,11 @@ int main()
       cin >> id;
       cout << endl;
 
+      //Student* tempS = studentTable.find(id);
+      //int idF = tempS -> getFacultyID();
+      //Faculty* tempF = facultyTable.find(idF);
+      //tempF -> printFacultyInfo();
+
       continue;
     }
 
@@ -85,6 +96,9 @@ int main()
       int id = 0;
       cout << "Please enter faculty ID number: ";
       cin >> id;
+      //if (facultyTable.contains(id))
+      //Faculty* temp = facultyTable.find(id);
+      //temp -> adviseeIDs
       cout << endl;
 
       continue;
@@ -127,6 +141,10 @@ int main()
       cin >> facAdvisorStu;
       cout << endl;
 
+      //if (facultyTable.contains(facAdvisorStu))
+      //add personStu -> getID();
+      //else faculty member does not exist
+
       Student* newStudent =  new Student(personStu, majorStu, gpaStu, facAdvisorStu);
       studentTable.insert(newStudent);
 
@@ -138,12 +156,19 @@ int main()
     if (option == 8)
     {
       int id = 0;
+      string name = "";
+
       cout << endl;
       cout << "Please enter student ID number: ";
       cin >> id;
       cout << endl;
 
-      studentTable.find(id);
+      //Student* temp = studentTable.find(id);
+      //name = temp -> person -> getName();
+      //studentTable.deleteNode(temp);
+
+      cout << name << " has successfully been removed." << endl;
+      sleep(2);
       continue;
     }
 
@@ -159,7 +184,6 @@ int main()
       cout << endl;
       cout << "Please enter faculty first name: ";
       cin >> fname;
-      cout << endl;
 
       cout << "Please enter faculty last name: ";
       cin >> lname;
@@ -168,7 +192,6 @@ int main()
 
       cout << "Please enter faculty level: ";
       cin >> levelFac;
-      cout << endl;
 
       //Create new person with random ID
       Person* personFac = new Person(f.createRandomID(), nameFac, levelFac);
@@ -189,10 +212,18 @@ int main()
     if (option == 10)
     {
       int id = 0;
+      string name = "";
+
       cout << "Please enter faculty ID number: ";
       cin >> id;
       cout << endl;
 
+      //Factuly* temp = facultyTable.find(id);
+      //name = temp -> person -> getID();
+      //facultyTable.deleteNode(temp);
+
+      cout << name << " has been successfully removed." << endl;
+      sleep(2);
       continue;
     }
 
@@ -209,6 +240,12 @@ int main()
       cout << "Please enter NEW faculty ID number: ";
       cin >> idF;
       cout << endl;
+
+      //if (studentTable.contains(idS))
+      //Student* tempS = studentTable.find(idS);
+      //if (facultyTable.contains(idF))
+      //Faculty* tempF = facultyTable.find(idF);
+      //tempS -> advisorID = tempF -> person -> getID();
 
       continue;
     }
@@ -227,6 +264,13 @@ int main()
       cin >> idF;
       cout << endl;
 
+      //if (facultyTable.contains(idF))
+      //Faculty* temp = facultyTable.find(idF);
+      //temp -> AdviseeIDs -> remove(idS);
+
+
+      cout << "Student has been removed from list." << endl;
+      sleep(2);
       continue;
     }
 
