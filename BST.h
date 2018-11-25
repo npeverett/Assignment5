@@ -4,6 +4,7 @@
 #define MARKER -1
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <typeinfo>
 #include <stdio.h>
 #include "Student.h"
@@ -65,17 +66,18 @@ public:
   void insert(T value);
   bool deleteNode(T value);
   bool contains(T value);
+  bool contains(int v);
   bool isEmpty();
 
-  T find(T v);
+  T find(int v);
   TreeNode<T>* getSuccessor(TreeNode<T>* d);
-  TreeNode<T>* getRoot();
+  T getRoot();
 
   void printTree();
   void recPrint(TreeNode<T>* node);
 
   void serialize(TreeNode<T>* node);
-  void deserialize();
+  void deserialize(string data);
 private:
   TreeNode<T>* root;
 };
@@ -330,9 +332,9 @@ TreeNode<T>* BST<T>::getSuccessor(TreeNode<T>* d)
 }
 
 template <class T>
-TreeNode<T>* BST<T>::getRoot()
+T BST<T>::getRoot()
 {
-  return root;
+  return root -> value;
 }
 
 //Method to see if a value is in the Tree
@@ -369,26 +371,33 @@ bool BST<T>::contains(T v)
       {
         return false;
       }
-
     }
   }
 
   return true;
 }
 
+//Overloaded 'contains' to check for ID instead instead of T object
 template <class T>
-T BST<T>::find(T v)
+bool BST<T>::contains(int v)
 {
   if (isEmpty())
   {
-    cout << "Tree is empty" << endl;
+    return false;
   }
+
   else
   {
     TreeNode<T>* curr = root;
-    while (curr -> value != v)
+    while (curr -> value -> person -> getID() != v)
     {
-      if (v < curr -> value)
+
+      if (isEmpty())
+      {
+        return false;
+      }
+
+      if (v < curr -> value -> person -> getID())
       {
         curr = curr -> left;
       }
@@ -400,7 +409,38 @@ T BST<T>::find(T v)
 
       if (curr == NULL)
       {
-        cout << "Could not find value" << endl;
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+template <class T>
+T BST<T>::find(int v)
+{
+  if (isEmpty())
+  {
+    cout << "Tree is empty" << endl;
+  }
+  else
+  {
+    TreeNode<T>* curr = root;
+    while (curr -> value -> person -> getID() != v)
+    {
+      if (v < curr -> value -> person -> getID())
+      {
+        curr = curr -> left;
+      }
+
+      else
+      {
+        curr = curr -> right;
+      }
+
+      if (curr == NULL)
+      {
         break;
       }
     }
@@ -457,7 +497,7 @@ void BST<T>::printTree()
 {
   if (isEmpty())
   {
-    cout << "Tree is empty" << endl;
+    cout << "Database is empty" << endl;
     return;
   }
 
@@ -477,14 +517,13 @@ void BST<T>::printTree()
 template <class T>
 void BST<T>::serialize(TreeNode<T>* node)
 {
-
 }
 
 
 template <class T>
-void BST<T>::deserialize()
+void BST<T>::deserialize(string data)
 {
-  int position = 0;
 }
+
 
 #endif

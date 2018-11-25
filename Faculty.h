@@ -12,18 +12,19 @@ public:
   Faculty(Person* p, string Department, DoubleLL<int> AdviseeIDs);
   ~Faculty();
 
-  bool operator!=(const Faculty& fc) const;
-  bool operator==(const Faculty& fc) const;
-  bool operator>(const Faculty& fc) const;
-  bool operator<(const Faculty& fc) const;
+  bool operator!=(Faculty* fc);
+  bool operator!= (int value);
+  bool operator==(Faculty* fc);
+  bool operator>(Faculty* fc);
+  bool operator<(Faculty* fc);
 
   void printFacultyInfo(Faculty* fc);
   string printStudentInfo(const Faculty* fc);
 
   int createRandomID();
 
-protected:
   Person* person;
-  string Department;
   DoubleLL<int> AdviseeIDs;
+protected:
+  string Department;
 };

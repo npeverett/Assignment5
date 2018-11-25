@@ -11,19 +11,24 @@ public:
   Student(Person* p, string Major, double GPA, int AdvisorID);
   ~Student();
 
-  bool operator!=(const Student& st) const;
-  bool operator==(const Student& st) const;
-  bool operator>(const Student& st) const;
-  bool operator<(const Student& st) const;
+  bool operator!=(Student* st);
+  bool operator!= (int value);
+  bool operator==(Student* st);
+  bool operator>(Student* st);
+  bool operator<(Student* st);
+  bool operator< (int v);
+
 
   void printStudentInfo(const Student* st);
   string printFacultyInfo(const Student* st);
   int createRandomID();
   int getFacultyID();
   void setFacultyID(Student* st, int newID);
-protected:
 
   Person* person;
+protected:
+
+  //Person* person;
   string Major;
   double GPA;
   int AdvisorID;

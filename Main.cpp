@@ -50,27 +50,46 @@ int main()
 
     if (option == 3)
     {
+      if (studentTable.isEmpty())
+      {
+        cout << "Student database is empty" << endl;
+        continue;
+      }
+
       int id = 0;
       cout << endl;
       cout << "Please enter student ID number: ";
       cin >> id;
       cout << endl;
 
-      //Student* temp = studentTable.find(id);
-      //cout << temp -> printStudentInfo() << endl;
+      if (studentTable.contains(id))
+      {
+        Student* temp = studentTable.find(id);
+        temp -> printStudentInfo(temp);
+      }
 
+      else
+      {
+        cout << "Could not find student with given ID" << endl;
+      }
       continue;
     }
     if (option == 4)
     {
+      if (facultyTable.isEmpty())
+      {
+        cout << "Faculty database is empty" << endl;
+        continue;
+      }
+
       int id = 0;
       cout << endl;
       cout << "Please enter faculty ID number: ";
       cin >> id;
       cout << endl;
 
-      //Faculty* temp = facultyTable.find(id);
-      //temp -> printFacultyInfo();
+      Faculty* temp = facultyTable.find(id);
+      temp -> printFacultyInfo(temp);
 
       continue;
     }
@@ -141,9 +160,16 @@ int main()
       cin >> facAdvisorStu;
       cout << endl;
 
-      //if (facultyTable.contains(facAdvisorStu))
-      //add personStu -> getID();
-      //else faculty member does not exist
+      if (facultyTable.contains(facAdvisorStu))
+      {
+        Faculty* temp = facultyTable.find(facAdvisorStu);
+        temp -> AdviseeIDs.insertFront(personStu -> getID());
+      }
+      else
+      {
+        cout << "Given faculty ID does not exist, terminating current student..." << endl;
+        continue;
+      }
 
       Student* newStudent =  new Student(personStu, majorStu, gpaStu, facAdvisorStu);
       studentTable.insert(newStudent);
@@ -163,9 +189,9 @@ int main()
       cin >> id;
       cout << endl;
 
-      //Student* temp = studentTable.find(id);
-      //name = temp -> person -> getName();
-      //studentTable.deleteNode(temp);
+      Student* temp = studentTable.find(id);
+      name = temp -> person -> getName();
+      studentTable.deleteNode(temp);
 
       cout << name << " has successfully been removed." << endl;
       sleep(2);
@@ -218,9 +244,9 @@ int main()
       cin >> id;
       cout << endl;
 
-      //Factuly* temp = facultyTable.find(id);
-      //name = temp -> person -> getID();
-      //facultyTable.deleteNode(temp);
+      Faculty* temp = facultyTable.find(id);
+      name = temp -> person -> getName();
+      facultyTable.deleteNode(temp);
 
       cout << name << " has been successfully removed." << endl;
       sleep(2);
@@ -247,6 +273,7 @@ int main()
       //Faculty* tempF = facultyTable.find(idF);
       //tempS -> advisorID = tempF -> person -> getID();
 
+      sleep(2);
       continue;
     }
 
@@ -291,6 +318,7 @@ int main()
     else
     {
       cout << "Please enter a valid choice" << endl;
+      sleep(2);
       continue;
     }
   }

@@ -27,24 +27,34 @@ Faculty::~Faculty()
 
 }
 
-bool Faculty::operator!= (const Faculty& fc) const
+// Does not equal operator overload
+bool Faculty::operator!= (Faculty* fc)
 {
-  return ID != fc.ID;
+  return person -> getID() != fc -> person -> getID();
 }
 
-bool Faculty::operator== (const Faculty& fc) const
+bool Faculty::operator!= (int value)
 {
-  return ID == fc.ID;
+  return person -> getID() != value;
 }
 
-bool Faculty::operator< (const Faculty& fc) const
+// Equals operator overload
+bool Faculty::operator== (Faculty* fc)
 {
-  return ID < fc.ID;
+  return person -> getID() == fc -> person -> getID();
 }
 
-bool Faculty::operator> (const Faculty& fc) const
+
+// Less than operator overload
+bool Faculty::operator< (Faculty* fc)
 {
-  return ID > fc.ID;
+  return person -> getID() < fc -> person -> getID();
+}
+
+// Greater than operator overload
+bool Faculty::operator> (Faculty* fc)
+{
+  return person -> getID() > fc -> person -> getID();
 }
 
 

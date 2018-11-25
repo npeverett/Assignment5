@@ -26,25 +26,38 @@ Student::~Student()
 {
 
 }
-
-bool Student::operator!= (const Student& st) const
+// Does not equal operator overload
+bool Student::operator!= (Student* st)
 {
-  return ID != st.ID;
+  return person -> getID() != st -> person -> getID();
 }
 
-bool Student::operator== (const Student& st) const
+bool Student::operator!= (int v)
 {
-  return ID == st.ID;
+  return person -> getID() != v;
 }
 
-bool Student::operator< (const Student& st) const
+// Equals operator overload
+bool Student::operator== (Student* st)
 {
-  return ID < st.ID;
+  return person -> getID() == st -> person -> getID();
 }
 
-bool Student::operator> (const Student& st) const
+// Less than operator overload
+bool Student::operator< (Student* st)
 {
-  return ID > st.ID;
+  return person -> getID() < st -> person -> getID();
+}
+
+bool Student::operator< (int v)
+{
+  return person -> getID() < v;
+}
+
+// Greater than operator overload
+bool Student::operator> (Student* st)
+{
+  return person -> getID() > st -> person -> getID();
 }
 
 void Student::printStudentInfo(const Student* st)
