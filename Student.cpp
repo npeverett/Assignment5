@@ -48,7 +48,6 @@ bool Student::operator< (Student* st)
 // Greater than operator overload
 bool Student::operator> (Student* st)
 {
-  cout << "hi <" << endl;
   return this -> person -> getID() > st -> person -> getID();
 }
 

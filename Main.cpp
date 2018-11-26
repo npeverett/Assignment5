@@ -20,14 +20,8 @@ int main()
   Faculty f;
   Person p;
 
-  int timer = 0;
   while (true)
   {
-    //Timer used so that screen isn't cleared during first run
-    if (timer > 0){
-      //cout << string( 50, '\n');
-    }
-    timer++;
 
     //Option for user input
     int option = 0;
@@ -68,7 +62,7 @@ int main()
 
       else
       {
-        cout << "Could not find student with given ID" << endl;
+        cout << "No student found with given ID" << endl;
       }
       continue;
     }
@@ -86,8 +80,16 @@ int main()
       cin >> id;
       cout << endl;
 
-      Faculty* temp = facultyTable.find(id);
-      temp -> printFacultyInfo(temp);
+      if (facultyTable.contains(id))
+      {
+        Faculty* temp = facultyTable.find(id);
+        temp -> printFacultyInfo(temp);
+      }
+      else
+      {
+        cout << "No faculty found with given ID" << endl;
+      }
+
 
       continue;
     }
@@ -221,13 +223,17 @@ int main()
       if (studentTable.contains(id))
       {
         Student* temp = studentTable.find(id);
-        Faculty* tempFac = facultyTable.find(temp -> getFacultyID());
 
         name = temp -> person -> getName();
         int tempID = temp -> person -> getID();
 
-        tempFac -> AdviseeIDs.remove(tempID);
         studentTable.deleteNode(temp);
+
+        if (temp -> getFacultyID() != 0)
+        {
+          Faculty* tempFac = facultyTable.find(temp -> getFacultyID());
+          tempFac -> AdviseeIDs.remove(tempID);
+        }
       }
       else
       {
@@ -291,6 +297,15 @@ int main()
       {
         Faculty* temp = facultyTable.find(id);
         name = temp -> person -> getName();
+
+        for (int i = 0; i < temp -> AdviseeIDs.size(); i++)
+        {
+          int currID = temp -> AdviseeIDs.getPositionData(i);
+          Student* tempStudent = studentTable.find(currID);
+          tempStudent -> setFacultyID(tempStudent, 0);
+          cout << endl;
+        }
+
         facultyTable.deleteNode(temp);
       }
       else
@@ -380,6 +395,9 @@ int main()
       {
         Faculty* temp = facultyTable.find(idF);
         temp -> removeStudent(temp, idS);
+
+        Student* tempStudent = studentTable.find(idS);
+        tempStudent -> setFacultyID(tempStudent, 0);
       }
 
 

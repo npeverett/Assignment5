@@ -201,7 +201,7 @@ bool BST<T>::deleteNode(T v)
     parent = curr;
 
     //If less than... go left
-    if (v < curr -> value)
+    if (*v < curr -> value)
     {
       isLeft = true;
       curr = curr -> left;
@@ -209,7 +209,7 @@ bool BST<T>::deleteNode(T v)
     }
 
     //If greater than... go right
-    if (v > curr -> value)
+    if (*v > curr -> value)
     {
       isLeft = false;
       curr = curr -> right;
@@ -357,7 +357,7 @@ bool BST<T>::contains(T v)
         return false;
       }
 
-      if (v < curr -> value)
+      if (*v < curr -> value)
       {
         curr = curr -> left;
       }
@@ -422,7 +422,6 @@ T BST<T>::find(int v)
 {
   if (isEmpty())
   {
-    cout << "Tree is empty" << endl;
   }
   else
   {
