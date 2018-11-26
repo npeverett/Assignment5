@@ -226,9 +226,7 @@ int main()
         name = temp -> person -> getName();
         int tempID = temp -> person -> getID();
 
-        cout << "5.0" << endl;
         tempFac -> AdviseeIDs.remove(tempID);
-        cout << "5.1" << endl;
         studentTable.deleteNode(temp);
       }
       else

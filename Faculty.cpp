@@ -84,5 +84,4 @@ int Faculty::createRandomID()
 void Faculty::removeStudent(Faculty* fc, int studentID)
 {
   fc -> AdviseeIDs.remove(studentID);
-  cout << "Hi" << endl;
 }

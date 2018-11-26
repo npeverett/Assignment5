@@ -204,33 +204,37 @@ bool DoubleLL<T>::remove(T key)
   while (curr -> data != key)
   {
     curr = curr -> next;
-    cout << "1" << endl;
+
     if (curr == NULL)
     {
       cout << "Data given is not found in list." << endl;
       return false;
     }
   }
-  cout << "2" << endl;
+
   if (curr == front)
   {
     front = curr -> next;
   }
-  cout << "3" << endl;
+
+  else
+  {
+    curr -> prev -> next = curr -> next;
+  }
+
   if (curr == back)
   {
     back = curr -> prev;
-    cout << "4" << endl;
   }
 
-  cout << "5" << endl;
-  if (curr != front && curr != back)
+  else
   {
-    curr -> prev -> next = curr -> next;
     curr -> next -> prev = curr -> prev;
-    cout << "6" << endl;
   }
-  cout << "7" << endl;
+
+  curr -> next = NULL;
+  curr -> prev = NULL;
+
   delete curr;
   ListSize--;
   return true;
