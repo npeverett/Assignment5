@@ -62,6 +62,7 @@ public:
 
   //Other
   int find(T value);
+  T getPositionData(int pos);
   unsigned int size();
   void printList();
 
@@ -203,30 +204,33 @@ bool DoubleLL<T>::remove(T key)
   while (curr -> data != key)
   {
     curr = curr -> next;
-
+    cout << "1" << endl;
     if (curr == NULL)
     {
       cout << "Data given is not found in list." << endl;
       return false;
     }
   }
-
+  cout << "2" << endl;
   if (curr == front)
   {
     front = curr -> next;
   }
-
+  cout << "3" << endl;
   if (curr == back)
   {
     back = curr -> prev;
+    cout << "4" << endl;
   }
 
+  cout << "5" << endl;
   if (curr != front && curr != back)
   {
     curr -> prev -> next = curr -> next;
     curr -> next -> prev = curr -> prev;
+    cout << "6" << endl;
   }
-
+  cout << "7" << endl;
   delete curr;
   ListSize--;
   return true;
@@ -302,6 +306,27 @@ int DoubleLL<T>::find(T value)
   }
 
   return idx;
+}
+
+//Method to return data at a given index of List
+template <class T>
+T DoubleLL<T>::getPositionData(int pos)
+{
+  int idx = 0;
+  ListNode<T>* curr = front;
+  while (idx != pos)
+  {
+    curr = curr -> next;
+    idx++;
+
+    if (curr == NULL)
+    {
+      cout << "No data at given position" << endl;
+      exit(0);
+    }
+  }
+
+  return curr -> data;
 }
 
 //Method to get number of nodes in list

@@ -29,35 +29,27 @@ Student::~Student()
 // Does not equal operator overload
 bool Student::operator!= (Student* st)
 {
-  return person -> getID() != st -> person -> getID();
-}
-
-bool Student::operator!= (int v)
-{
-  return person -> getID() != v;
+  return this -> person -> getID() != st -> person -> getID();
 }
 
 // Equals operator overload
 bool Student::operator== (Student* st)
 {
-  return person -> getID() == st -> person -> getID();
+  return this -> person -> getID() == st -> person -> getID();
 }
 
 // Less than operator overload
 bool Student::operator< (Student* st)
 {
-  return person -> getID() < st -> person -> getID();
+  return this -> person -> getID() < st -> person -> getID();
 }
 
-bool Student::operator< (int v)
-{
-  return person -> getID() < v;
-}
 
 // Greater than operator overload
 bool Student::operator> (Student* st)
 {
-  return person -> getID() > st -> person -> getID();
+  cout << "hi <" << endl;
+  return this -> person -> getID() > st -> person -> getID();
 }
 
 void Student::printStudentInfo(const Student* st)

@@ -6,7 +6,6 @@
 #include "Person.h"
 #include "Student.h"
 #include "Faculty.h"
-#include "Error.h"
 
 using namespace std;
 
@@ -20,7 +19,6 @@ int main()
   Student s;
   Faculty f;
   Person p;
-  Error e;
 
   int timer = 0;
   while (true)
@@ -102,10 +100,19 @@ int main()
       cin >> id;
       cout << endl;
 
-      //Student* tempS = studentTable.find(id);
-      //int idF = tempS -> getFacultyID();
-      //Faculty* tempF = facultyTable.find(idF);
-      //tempF -> printFacultyInfo();
+      if (studentTable.contains(id))
+      {
+        Student* tempS = studentTable.find(id);
+        int idF = tempS -> getFacultyID();
+        Faculty* tempF = facultyTable.find(idF);
+        tempF -> printFacultyInfo(tempF);
+      }
+      else
+      {
+        cout << "No student found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
 
       continue;
     }
@@ -115,10 +122,31 @@ int main()
       int id = 0;
       cout << "Please enter faculty ID number: ";
       cin >> id;
-      //if (facultyTable.contains(id))
-      //Faculty* temp = facultyTable.find(id);
-      //temp -> adviseeIDs
-      cout << endl;
+      if (facultyTable.contains(id))
+      {
+        Faculty* temp = facultyTable.find(id);
+        if (temp -> AdviseeIDs.size() == 0)
+        {
+          cout << "No students have been assigned to this faculty member" << endl;
+          sleep(2);
+          continue;
+        }
+
+        for (int i = 0; i < temp -> AdviseeIDs.size(); i++)
+        {
+          int currID = temp -> AdviseeIDs.getPositionData(i);
+          Student* tempStudent = studentTable.find(currID);
+          tempStudent -> printStudentInfo(tempStudent);
+          cout << endl;
+        }
+
+      }
+      else
+      {
+        cout << "No faculty found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
 
       continue;
     }
@@ -167,7 +195,8 @@ int main()
       }
       else
       {
-        cout << "Given faculty ID does not exist, terminating current student..." << endl;
+        cout << "No faculty found with given ID, terminating current student..." << endl;
+        sleep(2);
         continue;
       }
 
@@ -189,9 +218,25 @@ int main()
       cin >> id;
       cout << endl;
 
-      Student* temp = studentTable.find(id);
-      name = temp -> person -> getName();
-      studentTable.deleteNode(temp);
+      if (studentTable.contains(id))
+      {
+        Student* temp = studentTable.find(id);
+        Faculty* tempFac = facultyTable.find(temp -> getFacultyID());
+
+        name = temp -> person -> getName();
+        int tempID = temp -> person -> getID();
+
+        cout << "5.0" << endl;
+        tempFac -> AdviseeIDs.remove(tempID);
+        cout << "5.1" << endl;
+        studentTable.deleteNode(temp);
+      }
+      else
+      {
+        cout << "No student found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
 
       cout << name << " has successfully been removed." << endl;
       sleep(2);
@@ -244,9 +289,18 @@ int main()
       cin >> id;
       cout << endl;
 
-      Faculty* temp = facultyTable.find(id);
-      name = temp -> person -> getName();
-      facultyTable.deleteNode(temp);
+      if (facultyTable.contains(id))
+      {
+        Faculty* temp = facultyTable.find(id);
+        name = temp -> person -> getName();
+        facultyTable.deleteNode(temp);
+      }
+      else
+      {
+        cout << "No faculty found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
 
       cout << name << " has been successfully removed." << endl;
       sleep(2);
@@ -255,6 +309,7 @@ int main()
 
     if (option == 11)
     {
+      Student* tempS;
       int idS = 0;
       int idF = 0;
 
@@ -267,12 +322,30 @@ int main()
       cin >> idF;
       cout << endl;
 
-      //if (studentTable.contains(idS))
-      //Student* tempS = studentTable.find(idS);
-      //if (facultyTable.contains(idF))
-      //Faculty* tempF = facultyTable.find(idF);
-      //tempS -> advisorID = tempF -> person -> getID();
+      if (studentTable.contains(idS))
+      {
+        tempS = studentTable.find(idS);
+      }
+      else
+      {
+        cout << "No student found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
 
+      if (facultyTable.contains(idF))
+      {
+        Faculty* tempF = facultyTable.find(idF);
+        tempS -> setFacultyID(tempS, tempF -> person -> getID());
+      }
+      else
+      {
+        cout << "No faculty found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
+
+      cout << "Student advisor successfully updated." << endl;
       sleep(2);
       continue;
     }
@@ -291,20 +364,35 @@ int main()
       cin >> idF;
       cout << endl;
 
-      //if (facultyTable.contains(idF))
-      //Faculty* temp = facultyTable.find(idF);
-      //temp -> AdviseeIDs -> remove(idS);
+      if (studentTable.contains(idS) == false)
+      {
+        cout << "No student found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
+
+      if (facultyTable.contains(idF) == false)
+      {
+        cout << "No faculty found with given ID" << endl;
+        sleep(2);
+        continue;
+      }
+
+      else
+      {
+        Faculty* temp = facultyTable.find(idF);
+        temp -> removeStudent(temp, idS);
+      }
 
 
-      cout << "Student has been removed from list." << endl;
+      cout << "Student successfully removed from advisor list." << endl;
       sleep(2);
       continue;
     }
 
     if (option == 13)
     {
-
-
+      cout << "This method has not been implemented yet" << endl;
       continue;
     }
 

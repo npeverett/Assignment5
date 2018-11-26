@@ -30,31 +30,26 @@ Faculty::~Faculty()
 // Does not equal operator overload
 bool Faculty::operator!= (Faculty* fc)
 {
-  return person -> getID() != fc -> person -> getID();
-}
-
-bool Faculty::operator!= (int value)
-{
-  return person -> getID() != value;
+  return this -> person -> getID() != fc -> person -> getID();
 }
 
 // Equals operator overload
 bool Faculty::operator== (Faculty* fc)
 {
-  return person -> getID() == fc -> person -> getID();
+  return this -> person -> getID() == fc -> person -> getID();
 }
 
 
 // Less than operator overload
 bool Faculty::operator< (Faculty* fc)
 {
-  return person -> getID() < fc -> person -> getID();
+  return this -> person -> getID() < fc -> person -> getID();
 }
 
 // Greater than operator overload
 bool Faculty::operator> (Faculty* fc)
 {
-  return person -> getID() > fc -> person -> getID();
+  return this -> person -> getID() > fc -> person -> getID();
 }
 
 
@@ -84,4 +79,10 @@ int Faculty::createRandomID()
   int id = 10000 + rand() % 9999 + 1;
 
   return id;
+}
+
+void Faculty::removeStudent(Faculty* fc, int studentID)
+{
+  fc -> AdviseeIDs.remove(studentID);
+  cout << "Hi" << endl;
 }

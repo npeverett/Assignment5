@@ -12,11 +12,9 @@ public:
   ~Student();
 
   bool operator!=(Student* st);
-  bool operator!= (int value);
   bool operator==(Student* st);
   bool operator>(Student* st);
   bool operator<(Student* st);
-  bool operator< (int v);
 
 
   void printStudentInfo(const Student* st);
@@ -29,7 +27,7 @@ public:
 protected:
 
   //Person* person;
+  int AdvisorID;
   string Major;
   double GPA;
-  int AdvisorID;
 };

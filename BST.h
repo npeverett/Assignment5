@@ -150,7 +150,7 @@ void BST<T>::insert(T v)
     {
       parent = current;
 
-      if (v < current -> value)
+      if (*v < current -> value)
       {
         current = current -> left;
         if (current == NULL)
@@ -349,7 +349,7 @@ bool BST<T>::contains(T v)
   else
   {
     TreeNode<T>* curr = root;
-    while (curr -> value != v)
+    while (*curr -> value != v)
     {
 
       if (isEmpty())

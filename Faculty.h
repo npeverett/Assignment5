@@ -13,7 +13,6 @@ public:
   ~Faculty();
 
   bool operator!=(Faculty* fc);
-  bool operator!= (int value);
   bool operator==(Faculty* fc);
   bool operator>(Faculty* fc);
   bool operator<(Faculty* fc);
@@ -22,6 +21,7 @@ public:
   string printStudentInfo(const Faculty* fc);
 
   int createRandomID();
+  void removeStudent(Faculty* fc, int studentID);
 
   Person* person;
   DoubleLL<int> AdviseeIDs;
